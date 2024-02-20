@@ -1,0 +1,1032 @@
+{
+	"info": {
+		"_postman_id": "8a578f5a-b3f9-4700-acd8-2476ed6a466b",
+		"name": "Group_32",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29729790",
+		"_collection_link": "https://www.postman.com/mylis84/workspace/qa-group-32/collection/29729790-8a578f5a-b3f9-4700-acd8-2476ed6a466b?action=share&source=collection_link&creator=29729790"
+	},
+	"item": [
+		{
+			"name": "new",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "first",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// http://162.55.220.72:5005/first\r",
+							"// 1. Отправить запрос.\r",
+							"// 2. Статус код 200\r",
+							"// 3. Проверить, что в body приходит правильный string.\r",
+							"\r",
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"This is the first responce from server!ss\");\r",
+							"});\r",
+							"\r",
+							"// pm.test(\"Body is correct\", function () {\r",
+							"//     pm.response.to.have.body(\"response_body_string\");\r",
+							"// });\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/first",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"first"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/get_method?name=Maryana&age=38",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"get_method"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Maryana"
+						},
+						{
+							"key": "age",
+							"value": "38"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_info_3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var req_body = request.data\r",
+							"var jsonData = pm.response.json();\r",
+							"var u_name = jsonData.family.children[0][0]\r",
+							"\r",
+							"\r",
+							"console.log(req_body.age)\r",
+							"\r",
+							"\r",
+							"pm.test(\"Your test name ==\" + u_name, function () {\r",
+							"\r",
+							"  pm.expect(u_name).to.eql(\"Alex\");\r",
+							"})\r",
+							"\r",
+							"\r",
+							"console.log(u_name)\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "38",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Maryana",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_3?age&salary&name",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_3"
+					],
+					"query": [
+						{
+							"key": "age",
+							"value": null
+						},
+						{
+							"key": "salary",
+							"value": null
+						},
+						{
+							"key": "name",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_info_3_group_32",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let req_f = request.data\r",
+							"let resp_f = pm.response.json();\r",
+							"\r",
+							"let req_age = +req_f.age\r",
+							"let resp_age = +resp_f.age\r",
+							"\r",
+							"let req_salary = +req_f.salary\r",
+							"let resp_salary_1_5_years = resp_f.family.u_salary_1_5_year\r",
+							"let children_2_name = resp_f.family.children[1][0]\r",
+							"\r",
+							"\r",
+							"\r",
+							"console.log(req_f)\r",
+							"console.log(\"req_age=\" + req_age)\r",
+							"console.log(\"resp_age =\" + resp_age)\r",
+							"console.log(\"resp_age = \" +typeof resp_age)\r",
+							"console.log(resp_salary_1_5_years)\r",
+							"console.log(resp_f.family.children)\r",
+							"\r",
+							"\r",
+							"pm.test(\"Check_age\", function () { \r",
+							"    pm.expect(req_age).to.eql(resp_age);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check_salary_1.5_year\", function () { \r",
+							"    pm.expect(req_salary*4).to.eql(resp_salary_1_5_years);\r",
+							"});\r",
+							"pm.test(\"children_2_name\", function () { \r",
+							"    pm.expect(children_2_name).to.eql(\"Kate\");\r",
+							"});\r",
+							"pm.test(\"name_type\", function () { \r",
+							"    pm.expect(resp_f.name).to.be.a(\"String\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"name_type\", function () { \r",
+							"    pm.expect(resp_f.salary).to.be.a(\"Number\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Have family property\", function () { \r",
+							"    pm.expect(resp_f).to.have.property(\"family\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"All properties\", function () { \r",
+							"    pm.expect(resp_f).to.have.all. keys(\"age\",\"family\", \"name\", \"salary\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Inner properties\", function () { \r",
+							"    pm.expect(resp_f.family).to.have.all. keys(\"children\",\"u_salary_1_5_year\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"All properties\", function () { \r",
+							"    pm.expect(resp_f).to.have.any. keys(\"ageii\",\"familiey\", \"name\", \"salary\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"// Несколько тестов можно объединить в один:\r",
+							"// pm.test(\"Have family property\", function () { \r",
+							"//     pm.expect(resp_f).to.have.property(\"family\");\r",
+							"//     pm.expect(resp_f.salary).to.be.a(\"Number\");\r",
+							"//     pm.expect(resp_f.family).to.have.all. keys(\"children\",\"u_salary_1_5_year\");\r",
+							"// });\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"// var req_body = request.data\r",
+							"// var jsonData = pm.response.json();\r",
+							"// var u_name = jsonData.family.children[0][0]\r",
+							"\r",
+							"\r",
+							"// console.log(req_body.age)\r",
+							"\r",
+							"\r",
+							"// pm.test(\"Your test name ==\" + u_name, function () {\r",
+							"\r",
+							"//   pm.expect(u_name).to.eql(\"Alex\");\r",
+							"// })\r",
+							"\r",
+							"\r",
+							"// console.log(u_name)\r",
+							"\r",
+							"\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "38",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Maryana",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_3",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"var resp_u_age = jsonData.person.u_age\r",
+							"\r",
+							"console.log(\"resp_u_age == \" + resp_u_age, typeof resp_u_age)\r",
+							"\r",
+							"\r",
+							"// var req_url = request.url\r",
+							"var req_url = pm.request.url.query.toObject()\r",
+							"var req_salary13 = req_url.salary13\r",
+							"console.log(\"req_salary13 == \" + req_salary13, typeof req_salary13)\r",
+							"\r",
+							"\r",
+							"\r",
+							"var req_body = JSON.parse(pm.request.body.raw)\r",
+							"var r_age = req_body.age\r",
+							"console.log(\"r_age == \" + r_age, typeof r_age)\r",
+							"pm.test(\"Check u_age\", function () {\r",
+							"\r",
+							"    pm.expect(resp_u_age).to.eql(r_age);\r",
+							"});\r",
+							"\r",
+							"let reqData = JSON.parse(request.data)\r",
+							"let reqUrl = pm.request.url.query.toObject()\r",
+							"\r",
+							"console.log(reqData)\r",
+							"console.log(reqData.age)\r",
+							"console.log(reqUrl.country)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Maryana\",\r\n    \"age\": 38,\r\n    \"salary\": 1000,\r\n    \"auth_token\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/user_info?city=Antalya&country=Turkey",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user_info"
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "Antalya"
+						},
+						{
+							"key": "country",
+							"value": "Turkey"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_info_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();\r",
+							"let reqData = request.data; \r",
+							"let reqAge = +reqData.age\r",
+							"let reqUrl = pm.request.url.query.toObject()\r",
+							"\r",
+							"console.log(reqAge)\r",
+							"console.log (reqData.age)\r",
+							"console.log (reqUrl)\r",
+							"\r",
+							"pm.test(\"Check age\", function () {\r",
+							"     pm.expect(jsonData.age).to.eql(reqAge);\r",
+							"});\r",
+							"\r",
+							"// pm.test(\"Body is correct\", function() {\r",
+							"//     pm.response.to.have.body(jsonData);\r",
+							"// });\r",
+							"\r",
+							"pm.test(\"Check age param\", function (){\r",
+							"    pm.expect(JSON.stringify(jsonData)).to.include(\"age\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check daily sleep\", function (){\r",
+							"    pm.expect(JSON.stringify(jsonData)).to.include(\"daily_sleep\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check name property\", function() {\r",
+							" pm.expect(jsonData).to.have.property(\"name\")\r",
+							"});\r",
+							"\r",
+							"// Установка переменных в нашем окружении (для New_data):\r",
+							"\r",
+							"pm.environment.set(\"sleep\", jsonData.daily_sleep);\r",
+							"\r",
+							"let envSleep = pm.environment.get(\"sleep\");\r",
+							"console.log(envSleep)\r",
+							"\r",
+							"pm.test(\"all keys\", function (){\r",
+							"    pm.expect(jsonData).to.have.all.keys(\"name\", \"age\", \"daily_food\", \"daily_sleep\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"any keys\", function (){\r",
+							"    pm.expect(jsonData).to.have.any.keys(\"name\", \"salary\", \"auth_token\")});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "39",
+							"type": "text"
+						},
+						{
+							"key": "weight",
+							"value": "48",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Maryana",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/user_info_1?city=Antalya&country=Turkey",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user_info_1"
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "Antalya"
+						},
+						{
+							"key": "country",
+							"value": "Turkey"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new_data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var resp_Data = pm.response.json();\r",
+							"\r",
+							"var salary_1 = +resp_Data.salary[1]\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.test(\"Check user_age\", function () {\r",
+							"    pm.expect(resp_Data.age).to.eql(39);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Check salary\", function () {\r",
+							"    pm.expect(salary_1).to.eql(2000);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Maryana\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "39",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Maryana",
+							"type": "text"
+						},
+						{
+							"key": "auth_token",
+							"value": "{{auth_token}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/new_data",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"new_data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user_info",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"age\": 39,\r\n   \"salary\": 1000,\r\n   \"name\": \"Maryana\",\r\n   \"auth_token\": \"{{auth_token}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/user_info",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user_info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							" var gr_32_json = pm.response.json();\r",
+							" var gr_32_token = gr_32_json.token\r",
+							"\r",
+							"\r",
+							"\r",
+							"pm.environment.set(\"auth_token\", gr_32_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "login",
+							"value": "Maryana",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "39sgr2s23",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New_data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();\r",
+							"let respSalary = jsonData.salary\r",
+							"\r",
+							"let envSleep = pm.environment.get(\"sleep\");\r",
+							"console.log(envSleep)\r",
+							"\r",
+							"\r",
+							"pm.test(\"personSalary\", function(){\r",
+							"    pm.expect(+respSalary[1]).to.eql(2000);\r",
+							"});\r",
+							"pm.test(\"Name string\", function() {\r",
+							"    pm.expect(jsonData.name).to.be.a(\"String\")\r",
+							"});\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"\r",
+							"// pm.test(\"personSalary\", function(){\r",
+							"//     pm.expect(person[0][1]).to.eql(24);\r",
+							"// });\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "age",
+							"value": "38",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Maryana",
+							"type": "text"
+						},
+						{
+							"key": "auth_token",
+							"value": "34r3gr323gr",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/new_data",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"new_data"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/get_method?name=Maryana&age=38",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"get_method"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Maryana"
+						},
+						{
+							"key": "age",
+							"value": "38"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Maryana",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "38",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_3",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_1?name=Maryana&age=38&weight=48",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_1"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Maryana"
+						},
+						{
+							"key": "age",
+							"value": "38"
+						},
+						{
+							"key": "weight",
+							"value": "48"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_2?name=Maryana&age=38&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_2"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Maryana"
+						},
+						{
+							"key": "age",
+							"value": "38"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_5",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_3?name=Maryana&age=38&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_3"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Maryana"
+						},
+						{
+							"key": "age",
+							"value": "38"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_6",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://162.55.220.72:5005/object_info_4?name=Maryana&age=38&salary=1000",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"object_info_4"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Maryana"
+						},
+						{
+							"key": "age",
+							"value": "38"
+						},
+						{
+							"key": "salary",
+							"value": "1000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EP_7",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Maryana",
+							"type": "text"
+						},
+						{
+							"key": "age",
+							"value": "38",
+							"type": "text"
+						},
+						{
+							"key": "salary",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://162.55.220.72:5005/user_info_2",
+					"protocol": "http",
+					"host": [
+						"162",
+						"55",
+						"220",
+						"72"
+					],
+					"port": "5005",
+					"path": [
+						"user_info_2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Status code is 200\", function () {",
+					"    pm.response.to.have.status(200);",
+					"});"
+				]
+			}
+		}
+	]
+}
